@@ -1,8 +1,15 @@
-# 1. Carregar o pacote necessário para ler os arquivos CSV
+# ==========================================
+# 1. CARREGAR AS BIBLIOTECAS
+# ==========================================
 library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(geosphere)
 
-# 2. Importar a base de Partidas (Ajustando os formatos de data e hora)
-# O locale é configurado para ler datas no padrão brasileiro e corrigir o encoding
+# ==========================================
+# 2. IMPORTAR AS BASES ORIGINAIS (CSVs)
+# ==========================================
 Partidas <- read_csv("dataset/campeonato-brasileiro-full.csv", 
                      col_types = cols(data = col_date(format = "%d/%m/%Y"), 
                                       hora = col_character()), 
@@ -11,5 +18,14 @@ Partidas <- read_csv("dataset/campeonato-brasileiro-full.csv",
                                      decimal_mark = ",", 
                                      grouping_mark = "."))
 
-# 3. Importar a base de Gols
 Gols <- read_csv("dataset/campeonato-brasileiro-gols.csv")
+
+# ==========================================
+# 3. CARREGAR AS TABELAS PROCESSADAS (RDS)
+# ==========================================
+coordenadas_estados <- readRDS("dataset/coordenadas_estados.rds")
+dados_boxplot <- readRDS("dataset/dados_boxplot.rds")
+dados_linhas <- readRDS("dataset/dados_linhas.rds")
+dados_mandante_rodada <- readRDS("dataset/dados_mandante_rodada.rds")
+partidas_filtradas <- readRDS("dataset/partidas_filtradas.rds")
+tabela_triunfos <- readRDS("dataset/tabela_triunfos.rds")
